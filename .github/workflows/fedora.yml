@@ -1,9 +1,9 @@
 name: Fedora
 
 on:
-  pull_request:
+  push:
     branches:
-      - dev
+      - test
 
 jobs:
   build:
@@ -37,6 +37,8 @@ jobs:
         env:
           XMAKE_ROOT: y
         run: |
+          pwd
+          git diff --name-only HEAD^
           xmake l ./scripts/test.lua -D -k ${{ matrix.kind }} -j1
 
 
